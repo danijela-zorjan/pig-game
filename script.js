@@ -3,8 +3,6 @@
 const player0El = document.querySelector(".player--0");
 const player1El = document.querySelector(".player--1");
 const score0El = document.querySelector("#score--0");
-//another way of selecting an element - ID
-// it is supposed to ebb a little bit faster than query Selector
 const score1El = document.getElementById("score--1");
 const current0El = document.getElementById("current--0");
 const current1El = document.getElementById("current--1");
@@ -30,13 +28,10 @@ const init = function () {
   diceEl.classList.add("hidden");
   player0El.classList.remove("player--winner");
   player1El.classList.remove("player--winner");
-  player0El.classList.add("player--active"); //because he starts the game
-  //even if there is a class by that name JS WILL NOT ADD IT TWICE SO THAT IS OK
+  player0El.classList.add("player--active"); 
   player1El.classList.remove("player--active");
 };
 init();
-//we need to load it after initialization so that when the
-// page loads, it runs the function and sets all nubers to zero
 
 let switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
@@ -58,26 +53,19 @@ btnRoll.addEventListener("click", function () {
       document.getElementById(`current--${activePlayer}`).textContent =
         currentScore;
     } else {
-      // switch to another player
       switchPlayer();
-      //TOGGLE method is another method available on the class list property
-      //toggle() adds the class if it is not there
-      // and removes it if it is there
     }
   }
 });
 
 btnHold.addEventListener("click", function () {
-  // 1. Add current score to active player's score
   if (playing) {
     scores[activePlayer] += currentScore;
 
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
 
-    //2. Check if player's score is >= 100
     if (scores[activePlayer] >= 100) {
-      // Finish the game
       playing = false;
       diceEl.classList.add("hidden");
       document
